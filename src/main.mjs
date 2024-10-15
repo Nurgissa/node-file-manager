@@ -1,26 +1,19 @@
-import { createInterface } from 'node:readline';
-import { stdin, stdout } from 'node:process';
+import {createInterface} from 'node:readline';
+import {argv, chdir, stdin, stdout} from 'node:process';
+import {homedir} from "node:os";
 
-
-function extractUsername() {
-    return "unknown";
-}
-
-function parseCommand() {
-    return "";
-}
-
-function commandHandler() {
-    return "";
-}
-
-function promptGreeting(username) {
-    console.log(`Welcome to the File Manager, ${username}!\n`);
-}
+import {commandHandler, parseCommand} from "./cli/command-parser.mjs";
+import {extractUsername, promptFarewell, promptGreeting} from "./cli/helpers.mjs";
 
 (function main() {
-    const username = extractUsername(process.argv);
+    const username = extractUsername(argv);
+    chdir(homedir());
+
+
     promptGreeting(username);
+
+    // const newPath = join(__dirname, 'subfolder'); // or any other path you want
+    // process.chdir(newPath);
 
     const rl = createInterface({
         input: stdin,
@@ -30,11 +23,14 @@ function promptGreeting(username) {
 
     rl.on('line', (line) => {
         const commandParams = parseCommand(line);
-        console.log(commandParams);
+        commandHandler(username)(commandParams);
     });
 
     rl.once('close', () => {
-        // end of input
-        console.log("ending interaction");
+        promptFarewell(username);
     });
+
+    process.on('SIGINT', () => {
+        promptFarewell(username);
+    })
 })()
