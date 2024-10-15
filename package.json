@@ -1,0 +1,25 @@
+{
+  "name": "file-manager",
+  "version": "0.0.1",
+  "description": "Simple file-manager emulation using streams and no external dependencies",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node src/main.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nurgissa/file-manager.git"
+  },
+  "keywords": [
+    "nodejs",
+    "file-manager"
+  ],
+  "author": "Nurgissa Umatay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nurgissa/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/Nurgissa/node-file-manager#readme"
+}
